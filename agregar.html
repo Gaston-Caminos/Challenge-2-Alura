@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="script.js"></script>
+        <title>Agregar nueva palabra</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <img id="logo_alura" src="imagenes/Logo.png" alt="Logo de Alura"/>
+        </header>
+        
+        <main>
+            <div class="palabra">
+                <textarea id="palabraIngresada" rows="5" cols="50" placeholder="Ingrese una palabra" maxlength="8"></textarea>
+            </div>
+            
+            <div class="campo_advertencia">
+                <img id="advertencia" src="imagenes/bi_exclamation-circle-fill.png" alt="Signo de advertencia"/>
+                <p> Máx. de 8 letras.</p>
+            </div>
+
+            <div class="botones_agregar">
+                <button class="boton boton_guardar" onclick="location.href='index.html'">Guardar y salir</button>
+                <button class="boton boton_cancelar" onclick="location.href='index.html'">Cancelar</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Creado por Gastón Caminos</p>
+            <a href="https://github.com/Gaston-Caminos" target="_blank" class="contact-details"><i class="fab fa-github"></i> GitHub</a>
+            <a href="mailto:gastoncaminos98@gmail.com" target="_blank" class="contact-details"><i class="fas fa-at"></i> Send a mail</a>
+            <a href="https://www.linkedin.com/in/gast%C3%B3n-caminos/" target="_blank" class="contact-details"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        </footer>
+        
+        
+    </body>
+</html>
