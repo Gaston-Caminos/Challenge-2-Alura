@@ -34,8 +34,8 @@ const iniciarJuego = () => {
 }
 
 const reiniciar = () => {
-    location.reload();
-    iniciarJuego();
+    borrarGuiones();
+    //iniciarJuego();
 }
 
 /**
@@ -185,6 +185,17 @@ const mostrarGuiones = () => {
         letra.classList.add("letra"); // Agrego la clase "letra" a cada caracter
         letra.classList.add("oculta"); // Agrego la clase "oculta" a cada caracter
         espacioLetras[0].appendChild(letra) // Agrego a cada letra como un "hijo" de mi div "espacioLetras"
+    })
+
+}
+
+/*const borrarGuiones = () => {
+    for (let i = 0; i < palabraSeleccionada.length; i++) 
+        /* Tratar de numerar las spans para luego poder eliminarlas en un for loop
+    }
+    palabraSeleccionada.forEach(letter => {
+        const letra = document.getElementsByClassName("letra"); // obtengo la letra
+        espacioLetras[0].removeChild(letra) // elimino la span
     })
 
 }
