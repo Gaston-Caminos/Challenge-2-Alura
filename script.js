@@ -1,7 +1,8 @@
 const palabras = ["HOLA", "PALABRA", "LAVADORA", "COMPUTADORA", "HAMBURGUESA", "PUERTA", "ESTORNUDO", "COLMILLO", "GUITARRA", "SACO", "PULSERA", "GORRO", "ALFOMBRA", "MANTECA", "SALSA", "TUERCA", "CARNAVAL", "MANDARINA", "ORNITORINCO", "CUERPO", "PELUCA", "CAMA", "CASA"]; // Array con todas las palabras posibles
-const boton_iniciar = document.getElementsByClassName("boton_iniciar"); // Obtengo el botón de inicio en la página principal
+//const boton_iniciar = document.getElementsByClassName("boton_iniciar"); // Obtengo el botón de inicio en la página principal
 const espacioLetras = document.getElementsByClassName("espacioLetras"); // Obtengo la div en la que se mostrarán los guiones
 const letrasIncorrectas = document.getElementsByClassName("letrasIncorrectas"); //  Obtengo la div en la que se mostrarán las letras incorrectas
+const medidaMain = document.getElementById("main"); // Tomo el elemento main para conocer sus medidas y ajustar el canvas de manera responsiva
 
 // Obtengo el canvas en el que dibujaré el muñeco
 let canvas = document.getElementById("canvas");
@@ -154,9 +155,14 @@ const letterEvent = event => {
  * Dibuja la "horca" en la que se irá dibujando nuestro muñeco
  */
 const dibujarHorca = () => {
+    if (medidaMain.width > 480) {
+        ctx.canvas.width = 400; 
+        ctx.canvas.height = 400;
+    } else {
+        ctx.canvas.width = 100; 
+        ctx.canvas.height = 400;
+    } 
     
-    ctx.canvas.width = 400; 
-    ctx.canvas.height = 400; 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0A3871";
     ctx.fillRect(0, ctx.canvas.width -20, ctx.canvas.width, 20); // Base de la horca

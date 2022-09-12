@@ -252,5 +252,7 @@ canvas {
 @media screen and (max-width: 480px) {
     #teclado_movil {
         display: block; /* Activo el teclado */
+       background-color: #0A3871;
+        color: #fff;
     }
 }
