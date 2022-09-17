@@ -4,10 +4,11 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <script type="text/javascript" src="script.js" defer></script>
-        <title>Juego del Ahorcado - Menú principal</title>
+        <title>Juego del Ahorcado</title>
         <link rel="stylesheet" href="styles.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link rel="icon" href="imagenes/ahorcado.png">
     </head>
 
     <body>
@@ -25,16 +26,16 @@
             </section>
             <!------------------------------------------- JUEGO ------------------------------------------>
             <section id="seccionJuego" class="ocultoAlPrincipio">
-                <input id="teclado_movil" type="text" autofocus>
                 <div class="ahorcado">
                     <canvas id="canvas"></canvas>
                 </div>
+
                 <div class="espacioLetras">
-    
                 </div>
+
                 <div class="letrasIncorrectas">
-    
                 </div>
+
                 <div class="botones_juego">
                     <button class="boton boton_nuevoJuego" onclick="reiniciar()">Nuevo juego</button>
                     <button class="boton boton_desistir" onclick="location.href='index.html'">Desistir</button>
@@ -47,6 +48,7 @@
 
             </section>
             <!-------------------------------------- AGREGAR PALABRAS -------------------------------------->
+            
             <section id="seccionAgregarPalabra" class="ocultoAlPrincipio">
                 <div class="palabra">
                     <textarea id="palabraIngresada" rows="5" cols="50" placeholder="Ingrese una palabra" maxlength="15"></textarea>

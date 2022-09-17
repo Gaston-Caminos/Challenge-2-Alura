@@ -1,5 +1,4 @@
-const palabras = ["HOLA", "PALABRA", "LAVADORA", "COMPUTADORA", "HAMBURGUESA", "PUERTA", "ESTORNUDO", "COLMILLO", "GUITARRA", "SACO", "PULSERA", "GORRO", "ALFOMBRA", "MANTECA", "SALSA", "TUERCA", "CARNAVAL", "MANDARINA", "ORNITORINCO", "CUERPO", "PELUCA", "CAMA", "CASA"]; // Array con todas las palabras posibles
-//const boton_iniciar = document.getElementsByClassName("boton_iniciar"); // Obtengo el botón de inicio en la página principal
+const palabras = ["HOLA", "PALABRA", "LAVADORA", "COMPUTADORA", "HAMBURGUESA", "PUERTA", "ESTORNUDO", "COLMILLO", "GUITARRA", "SACO", "PULSERA", "GORRO", "ALFOMBRA", "MANTECA", "SALSA", "TUERCA", "CARNAVAL", "MANDARINA", "ORNITORRINCO", "CUERPO", "PELUCA", "CAMA", "CASA"]; // Array con todas las palabras posibles
 const espacioLetras = document.getElementsByClassName("espacioLetras"); // Obtengo la div en la que se mostrarán los guiones
 const letrasIncorrectas = document.getElementsByClassName("letrasIncorrectas"); //  Obtengo la div en la que se mostrarán las letras incorrectas
 const medidaMain = document.getElementById("main"); // Tomo el elemento main para conocer sus medidas y ajustar el canvas de manera responsiva
@@ -14,8 +13,10 @@ let palabraSeleccionada;
 let letrasUsadas;
 let errores;
 let aciertos;
+let agrega = false; // Si "agrega == false", el juego toma una palabra aleatoria de la lista, si no, se usa la que el jugador ingresa
 
 /*******************************  FUNCIONES UTILIZADAS DURANTE EL JUEGO **********************************/
+
 /**
  ** Función que da inicio al juego y reinicia todas las variables a cero
  */
@@ -29,14 +30,24 @@ const iniciarJuego = () => {
     document.getElementById("seccionJuego").style.display = "block"; // Muestro el panel de juego
     document.getElementById("seccionInicial").style.display = "none"; // Oculto el menú principal
     dibujarHorca(); // Dibujo la horca
-    crearPalabraSecreta(); // Elijo una palabra aleatoria de my array de palabras
+    if (!agrega) {
+        crearPalabraSecreta(); // Elijo una palabra aleatoria de my array de palabras
+    } else {
+        palabraSeleccionada = document.getElementById("palabraIngresada").value.toUpperCase().split(""); // Si el jugador ingresa una palabra, tomo esa
+    }
     mostrarGuiones(); // Muestro los guiones para cada letra
     document.addEventListener("keydown", letterEvent); // Al presionar una tecla, se verificará si está o no en la palabra
 }
 
+/**
+ * Función que reinicia el juego
+ */
 const reiniciar = () => {
-    borrarGuiones();
-    //iniciarJuego();
+    agrega = false
+    borrarGuiones(); // Elimino la palabra anterior
+    iniciarJuego(); // Doy inicio al juego nuevamente
+    document.getElementById("mensaje_final").style.display = "none"; // Tomo el cuadro de mensaje para esconderlo al reiniciar el juego
+
 }
 
 /**
@@ -155,14 +166,8 @@ const letterEvent = event => {
  * Dibuja la "horca" en la que se irá dibujando nuestro muñeco
  */
 const dibujarHorca = () => {
-    if (medidaMain.width > 480) {
-        ctx.canvas.width = 400; 
-        ctx.canvas.height = 400;
-    } else {
-        ctx.canvas.width = 100; 
-        ctx.canvas.height = 400;
-    } 
-    
+    ctx.canvas.width = 400; 
+    ctx.canvas.height = 400;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0A3871";
     ctx.fillRect(0, ctx.canvas.width -20, ctx.canvas.width, 20); // Base de la horca
@@ -184,7 +189,6 @@ const crearPalabraSecreta = () => {
  * Función que agrega cada letra de la palabra seleccionada aleatoriamente 
  */
 const mostrarGuiones = () => {
-    
     palabraSeleccionada.forEach(letter => {
         const letra = document.createElement("span"); // Creo una span
         letra.innerHTML = letter;
@@ -192,35 +196,35 @@ const mostrarGuiones = () => {
         letra.classList.add("oculta"); // Agrego la clase "oculta" a cada caracter
         espacioLetras[0].appendChild(letra) // Agrego a cada letra como un "hijo" de mi div "espacioLetras"
     })
-
 }
 
-/*const borrarGuiones = () => {
-    for (let i = 0; i < palabraSeleccionada.length; i++) 
-        /* Tratar de numerar las spans para luego poder eliminarlas en un for loop
+/**
+ * Elimina los guiones de la palabra anterior para dar lugar a una nueva palabra aleatoria
+ */
+const borrarGuiones = () => {
+    for (let i = 0; i < palabraSeleccionada.length; i++) {
+        espacioLetras[0].removeChild(espacioLetras[0].lastElementChild); // elimino la span
     }
-    palabraSeleccionada.forEach(letter => {
-        const letra = document.getElementsByClassName("letra"); // obtengo la letra
-        espacioLetras[0].removeChild(letra) // elimino la span
-    })
 
+    while (letrasIncorrectas[0].childElementCount > 0) {
+        letrasIncorrectas[0].removeChild(letrasIncorrectas[0].lastElementChild); // Borro todas las letras que se usaron
+    }
 }
 
 /************************************ FUNCIONES AGREGAR PALABRA NUEVA ***********************************/
+
+/**
+ * Función que cambia a la pantalla "agregar una palabra"
+ */
 const agregar = () => {
     document.getElementById("seccionAgregarPalabra").style.display = "block"; // Muestro el panel para agregar palabras
     document.getElementById("seccionInicial").style.display = "none"; // Oculto el menú principal
 }
 
+/**
+ * Función que indica que el jugador desea agregar una palabra personalizada
+ */
 function agregarPalabra() {
-    /**
-     * Agrega una nueva palabra a la lista de palabras existente
-     */
-    
-    const palabra = document.getElementById("palabraIngresada").toUpperCase;
-    if (palabras.includes(palabra)) {
-        alert("Esta palabra ya se encuentra en la lista");
-    } else {
-        palabras.push(palabra.value.toUpperCase());
-    }
+    agrega = true;
+    iniciarJuego();
 }

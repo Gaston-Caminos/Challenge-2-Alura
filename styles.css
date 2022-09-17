@@ -45,11 +45,12 @@ footer {
     color: #FFF;
     text-decoration: none;
     margin: 10px;
+    transition: 1s all;
 }
 
-/*.ocultar {
-    visibility: hidden;
-}*/
+.contact-details:hover {
+    transform: translateY(10);
+}
 
 /******************************************** PÁGINA PRINCIPAL *********************************/
 
@@ -92,20 +93,10 @@ footer {
 }
 
 /************************************************ JUEGO ************************************************/
+
 canvas {
     display: flex;
     margin: auto;
-}
-
-#teclado_movil {
-    display: none;
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 100%;
-    color: transparent;
 }
 
 .botones_juego {
@@ -247,12 +238,4 @@ canvas {
     color: var(--color_1);
     border: 1px solid var(--color_1);
     border-radius: 10px;
-}
-
-@media screen and (max-width: 480px) {
-    #teclado_movil {
-        display: block; /* Activo el teclado */
-       background-color: #0A3871;
-        color: #fff;
-    }
 }
